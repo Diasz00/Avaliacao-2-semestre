@@ -1,6 +1,24 @@
 import csv
 import os
 
+NOME_ARQUIVO = "livros.csv"
+
+def carregar_livros():
+    """Lê o arquivo CSV e retorna uma lista de dicionários com os livros."""
+    if not os.path.exists(NOME_ARQUIVO):
+        return []
+
+    with open(NOME_ARQUIVO, "r", encoding="utf-8") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        return list(leitor)
+
+def salvar_livros(livros):
+    """Sobrescreve o arquivo CSV com a lista atualizada de livros."""
+    campos = ["Titulo", "Autor", "Ano", "Isbn", "Status"]
+    with open(NOME_ARQUIVO, "w", newline="", encoding="utf-8") as arquivo:
+        escritor = csv.DictWriter(arquivo, fieldnames=campos)
+        escritor.writeheader()
+        escritor.writerows(livros)
 
 
 # Menu Principal
