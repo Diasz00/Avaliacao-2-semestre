@@ -119,9 +119,9 @@ while True:
     elif opcao == "3":
         buscar_livros()
     elif opcao == "4":
-        print("Realizando empréstimo...")
+        alterar_status("Emprestado")
     elif opcao == "5":
-        print("Realizando devolução...")
+        alterar_status("Disponível")
     elif opcao == "6":
         print("Ordenando lista...")
     elif opcao == "7":
