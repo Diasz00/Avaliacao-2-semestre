@@ -99,6 +99,28 @@ def alterar_status(novo_status):
     if not encontrado:
         print("Livro não encontrado.")
 
+def ordenar_listagem():
+    print("\n===== ORDENAR LIVROS =====")
+    livros = carregar_livros()
+
+    if not livros:
+        print("Nenhum livro cadastrado para ordenar.")
+        return
+
+    print("1 - Título\n2 - Autor\n3 - Ano\n4 - ISBN")
+    opcao = input("Opção desejada (1-4): ").strip()
+
+    chaves = {"1": "Titulo", "2": "Autor", "3": "Ano", "4": "Isbn"}
+
+    if opcao in chaves:
+        campo = chaves[opcao]
+        livros.sort(key=lambda l: l[campo].lower())
+        salvar_livros(livros)
+        print(f"\nLivros ordenados por {campo}!")
+        listar_livros()
+    else:
+        print("Opção inválida.")
+
 # Menu Principal
 while True:
     print("\n===== MENU BIBLIOTECA =====")
@@ -123,7 +145,7 @@ while True:
     elif opcao == "5":
         alterar_status("Disponível")
     elif opcao == "6":
-        print("Ordenando lista...")
+        ordenar_listagem()
     elif opcao == "7":
         print("Saindo...")
         break
