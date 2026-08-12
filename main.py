@@ -4,7 +4,7 @@ import os
 NOME_ARQUIVO = "livros.csv"
 
 def carregar_livros():
-    """Lê o arquivo CSV e retorna uma lista de dicionários com os livros."""
+    # Lê o arquivo CSV e retorna uma lista de dicionários com os livros.
     if not os.path.exists(NOME_ARQUIVO):
         return []
 
@@ -13,13 +13,36 @@ def carregar_livros():
         return list(leitor)
 
 def salvar_livros(livros):
-    """Sobrescreve o arquivo CSV com a lista atualizada de livros."""
+    # Sobrescreve o arquivo CSV com a lista atualizada de livros.
     campos = ["Titulo", "Autor", "Ano", "Isbn", "Status"]
     with open(NOME_ARQUIVO, "w", newline="", encoding="utf-8") as arquivo:
         escritor = csv.DictWriter(arquivo, fieldnames=campos)
         escritor.writeheader()
         escritor.writerows(livros)
 
+def cadastrar_livro():
+    print("\n===== CADASTRO DE LIVRO =====")
+    titulo = input("Título: ").strip()
+    autor = input("Autor: ").strip()
+    ano = input("Ano de publicação: ").strip()
+    isbn = input("ISBN: ").strip()
+
+    if not titulo or not isbn:
+        print("Erro: Título e ISBN são obrigatórios.")
+        return
+
+    livros = carregar_livros()
+    novo_livro = {
+        "Titulo": titulo,
+        "Autor": autor,
+        "Ano": ano,
+        "Isbn": isbn,
+        "Status": "Disponível"
+    }
+    
+    livros.append(novo_livro)
+    salvar_livros(livros)
+    print(f"\nLivro '{titulo}' cadastrado com sucesso!")
 
 # Menu Principal
 while True:
@@ -35,7 +58,7 @@ while True:
     opcao = input("Escolha uma opção: ").strip()
 
     if opcao == "1":
-        print("Cadastrando livro...")
+        cadastrar_livro()
     elif opcao == "2":
         print("Listando livros...")
     elif opcao == "3":
