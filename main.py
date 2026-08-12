@@ -1,6 +1,8 @@
 import csv
 import os
 
+
+
 # Menu Principal
 while True:
     print("\n===== MENU BIBLIOTECA =====")
@@ -16,4 +18,18 @@ while True:
 
     if opcao == "1":
         print("Cadastrando livro...")
-    
+    elif opcao == "2":
+        print("Listando livros...")
+    elif opcao == "3":
+        print("Buscando livro...")
+    elif opcao == "4":
+        print("Realizando empréstimo...")
+    elif opcao == "5":
+        print("Realizando devolução...")
+    elif opcao == "6":
+        print("Ordenando lista...")
+    elif opcao == "7":
+        print("Saindo...")
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
