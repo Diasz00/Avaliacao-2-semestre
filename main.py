@@ -44,6 +44,17 @@ def cadastrar_livro():
     salvar_livros(livros)
     print(f"\nLivro '{titulo}' cadastrado com sucesso!")
 
+def listar_livros():
+    print("\n===== LISTA DE LIVROS =====")
+    livros = carregar_livros()
+
+    if not livros:
+        print("Nenhum livro cadastrado.")
+        return
+
+    for livro in livros:
+        print(f"Título: {livro['Titulo']} | Autor: {livro['Autor']} | Ano: {livro['Ano']} | ISBN: {livro['Isbn']} | Status: {livro['Status']}")
+
 # Menu Principal
 while True:
     print("\n===== MENU BIBLIOTECA =====")
@@ -60,7 +71,7 @@ while True:
     if opcao == "1":
         cadastrar_livro()
     elif opcao == "2":
-        print("Listando livros...")
+        listar_livros()
     elif opcao == "3":
         print("Buscando livro...")
     elif opcao == "4":
