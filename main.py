@@ -75,6 +75,30 @@ def buscar_livros():
     else:
         print("Nenhum livro encontrado.")
 
+def alterar_status(novo_status):
+    print(f"\n===== REGISTRAR {novo_status.upper()} =====")
+    termo = input("Digite o ISBN ou Título do livro: ").lower().strip()
+    
+    if not termo:
+        return
+
+    livros = carregar_livros()
+    encontrado = False
+
+    for livro in livros:
+        if termo == livro["Isbn"].lower() or termo in livro["Titulo"].lower():
+            encontrado = True
+            if livro["Status"] == novo_status:
+                print(f"O livro '{livro['Titulo']}' já consta como '{novo_status}'.")
+            else:
+                livro["Status"] = novo_status
+                salvar_livros(livros)
+                print(f"Sucesso! O status de '{livro['Titulo']}' foi alterado para '{novo_status}'.")
+            break
+
+    if not encontrado:
+        print("Livro não encontrado.")
+
 # Menu Principal
 while True:
     print("\n===== MENU BIBLIOTECA =====")
