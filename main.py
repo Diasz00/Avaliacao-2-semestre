@@ -55,6 +55,26 @@ def listar_livros():
     for livro in livros:
         print(f"Título: {livro['Titulo']} | Autor: {livro['Autor']} | Ano: {livro['Ano']} | ISBN: {livro['Isbn']} | Status: {livro['Status']}")
 
+def buscar_livros():
+    print("\n===== BUSCAR LIVRO =====")
+    termo = input("Digite o título ou autor: ").lower().strip()
+    
+    if not termo:
+        return
+
+    livros = carregar_livros()
+    resultados = [
+        l for l in livros 
+        if termo in l["Titulo"].lower() or termo in l["Autor"].lower()
+    ]
+
+    if resultados:
+        print(f"\nEncontrado(s) {len(resultados)} livro(s):")
+        for l in resultados:
+            print(f"- {l['Titulo']} (Autor: {l['Autor']}) [{l['Status']}]")
+    else:
+        print("Nenhum livro encontrado.")
+
 # Menu Principal
 while True:
     print("\n===== MENU BIBLIOTECA =====")
@@ -73,7 +93,7 @@ while True:
     elif opcao == "2":
         listar_livros()
     elif opcao == "3":
-        print("Buscando livro...")
+        buscar_livros()
     elif opcao == "4":
         print("Realizando empréstimo...")
     elif opcao == "5":
